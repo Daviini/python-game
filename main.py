@@ -1,41 +1,57 @@
 # A rock-paper-scissors game.
 import random
-options=['Rock','Paper','Scissor']
-name=input("Enter your name :")
-ComputerScore=0 
-PlayerScore=0
-NumberOfRounds=0
-gameOn=True
-print(f"Welcome {name.title()}")
-while NumberOfRounds<5:
-  ComputerOption=random.choice(options)
-  PlayerOption=input("Enter Rock/ Paper/ Scissor :").title()
-  print(f"Computer option :{ComputerOption}")
-  print(f"{name.title()} option :{PlayerOption}")
-  NumberOfRounds += 1
-  if ComputerOption==PlayerOption:
-    print('Tie')
-  elif (ComputerOption=='Rock' and PlayerOption == 'Scissor') or (ComputerOption=='Scissor' and PlayerOption=='Paper') or (ComputerOption=='Paper' and ComputerOption=='Rock'):
-    print("Computer wins")
-    ComputerScore += 1
-  elif (PlayerOption=='Rock' and ComputerOption == 'Scissor') or (PlayerOption=='Scissor' and ComputerOption=='Paper') or (PlayerOption=='Paper' and ComputerOption=='Rock'):
-    print(f"{name.title()} wins")
-    PlayerScore += 1
-  else:
-    print("Choose a valid option to play this game.") 
-  print("-------------------------")
-  print("")
-  print(f"Round No: {NumberOfRounds}")
-  print("------ Score Board ------")
-  print(f"{name.title()}: {PlayerScore} | Computer: {ComputerScore}")
-  print("===============================")
-  print("")
-  if NumberOfRounds==5:
-    gameOn=False
-    break
-if PlayerScore==ComputerScore:
-  print("Draw!!")
-elif PlayerScore>ComputerScore:
-  print(f"Congrats {name.title()}, You won the game!!")
-else:
-  print(f"Oops Computer won the game!! Better luck next time {name.title()}!")
+
+options = ["R", "P", "S"]
+
+player = [] #empty list
+cpu = []
+
+play_option = input("Pick an option; R, S or P: ")
+
+player.append(play_option) #adds what the user enters to the player list.
+cpu.append(random.choice(options)) 
+#the random module allows python to pick any value of its choice (using the choice() method) from options list.
+
+print(player)
+print(cpu)
+
+
+#while loop: an indefinite loop
+while True:
+    if player == cpu:
+        print("Player ({}) : CPU ({}). A tie".format(player, cpu))
+        play_option = input("Pick an option; R, S or P: ")
+        player.append(play_option)
+        cpu.append(random.choice(options))
+
+    elif ( "R" in player) and ("S" in cpu):
+        print("Player ({}) : CPU ({}). Player wins".format(player, cpu))
+        break 
+    #break keyword allows python to break out of the while loop when a condition have been met. 
+    #continue keyword allows python to skip an iteration
+    elif ("S" in player) and ("R" in cpu):
+        print("Player ({}) : CPU ({}). CPU wins".format(player, cpu))
+        break
+
+    elif ("S" in player) and ("P" in cpu):
+        print("Player ({}) : CPU ({}). Player wins".format(player, cpu))
+        break
+
+    elif ("P" in player) and ("S" in cpu):
+        print("Player ({}) : CPU ({}). CPU wins".format(player, cpu))
+        break
+
+    elif ("R" in player) and ("P" in cpu):
+        print("Player ({}) : CPU ({}). CPU wins".format(player, cpu))
+        break
+
+    elif ("P" in player) and ("R" in cpu):
+        print("Player ({}) : CPU ({}). Player wins".format(player, cpu))
+        break
+
+    else:
+        if player not in options:
+            print("Invalid input. Try again")
+            break
+
+print("Thanks for playing!")
